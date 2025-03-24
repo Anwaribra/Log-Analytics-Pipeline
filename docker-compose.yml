@@ -1,0 +1,43 @@
+version: '3'
+services:
+  spark-master:
+    image: apache/spark
+    ports:
+      - "8080:8080"  # Spark Web UI
+      - "7077:7077"  # Spark Master port
+    command: >
+      bash -c "
+        mkdir -p /opt/spark/logs &&
+        /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master --host spark-master --port 7077 --webui-port 8080
+      "
+    environment:
+      - SPARK_MODE=master
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+    volumes:
+      - ./spark_jobs:/opt/spark/jobs
+      - ./data:/opt/spark/data
+
+  spark-worker:
+    image: apache/spark
+    depends_on:
+      - spark-master
+    command: >
+      bash -c "
+        mkdir -p /opt/spark/logs &&
+        /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker --webui-port 8081 spark://spark-master:7077
+      "
+    environment:
+      - SPARK_MODE=worker
+      - SPARK_MASTER_URL=spark://spark-master:7077
+      - SPARK_WORKER_MEMORY=1G
+      - SPARK_WORKER_CORES=1
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+    volumes:
+      - ./spark_jobs:/opt/spark/jobs
+      - ./data:/opt/spark/data 

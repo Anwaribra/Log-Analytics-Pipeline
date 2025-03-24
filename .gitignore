@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environment
+venv/
+env/
+ENV/
+airflow_env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Project specific
+data/raw_logs/*
+data/processed_logs/*
+!data/raw_logs/.gitkeep
+!data/processed_logs/.gitkeep
+
+# Airflow
+airflow.db
+airflow-webserver.pid
+airflow-scheduler.pid
+logs/
+
+# Environment variables
+.env
+.env.*
+
+# OS specific
+.DS_Store
+Thumbs.db 
