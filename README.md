@@ -1,6 +1,6 @@
 # Log Analytics Pipeline
 
-This project implements an end-to-end log analytics pipeline that processes web server logs (Apache/Nginx) using Apache Airflow, Apache Spark, and PostgreSQL. The processed data is then visualized using Power BI.
+This project implements an end-to-end log analytics pipeline that processes web server logs Nginx using Apache Airflow, Apache Spark, and PostgreSQL. The processed data is then visualized using Power BI.
 
 ## Project Structure
 
@@ -27,8 +27,6 @@ log-analytics-pipeline/
 │── config/                    
 │   ├── airflow.cfg            
 │   ├── database.ini           
-│
-
 ```
 
 ## Prerequisites
