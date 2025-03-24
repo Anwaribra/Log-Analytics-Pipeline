@@ -1,6 +1,18 @@
 # Log Analytics Pipeline
 
-This project implements an end-to-end log analytics pipeline that processes web server logs (Apache/Nginx) using Apache Airflow, Apache Spark, and PostgreSQL. The processed data is then visualized using Power BI.
+This project implements an end-to-end log analytics pipeline that processes NASA HTTP server logs from July 1995 using Apache Airflow, Apache Spark, and PostgreSQL. The processed data is then visualized using Power BI.
+
+## Project Overview
+
+This pipeline analyzes NASA's web server logs from July 1995, which contain valuable information about web traffic patterns, including:
+- Timestamp of requests
+- IP addresses of clients
+- Request methods (GET, POST, etc.)
+- URLs accessed
+- HTTP status codes
+- Response sizes
+- Referrer information
+- User agents
 
 ## Project Structure
 
@@ -26,10 +38,11 @@ log-analytics-pipeline/
 │   ├── log_analytics.pbix    # Power BI dashboard
 │
 │── config/                    
-│   ├── airflow.cfg            
-│   ├── database.ini           
+│   ├── airflow.cfg          # Airflow configuration
+│   ├── database.ini         # Database connection settings
 │
-
+│── download_nasa_logs.py     # Script to download NASA logs
+│── requirements.txt          # Python dependencies
 ```
 
 ## Prerequisites
