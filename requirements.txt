@@ -1,0 +1,7 @@
+apache-airflow>=2.7.0
+pyspark>=3.5.0
+psycopg2-binary>=2.9.9
+python-dotenv>=1.0.0
+pandas>=2.1.0
+numpy>=1.24.0
+requests>=2.31.0 

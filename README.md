@@ -1,32 +1,35 @@
 # Log Analytics Pipeline
 
-This project implements an end-to-end log analytics pipeline that processes web server logs Nginx using Apache Airflow, Apache Spark, and PostgreSQL. The processed data is then visualized using Power BI.
+This project implements an end-to-end log analytics pipeline that processes web server logs (Apache/Nginx) using Apache Airflow, Apache Spark, and PostgreSQL. The processed data is then visualized using Power BI.
 
 ## Project Structure
 
 ```
 log-analytics-pipeline/
 │── dags/                   
-│   ├── log_ingestion.py      
-│   ├── spark_processing.py 
-│   ├── data_load.py         
+│   ├── log_ingestion.py      # Downloads NASA HTTP logs
+│   ├── spark_processing.py   # Processes logs using Spark
+│   ├── data_load.py         # Loads processed data into PostgreSQL
 │
 │── spark_jobs/               
-│   ├── process_logs.py        
+│   ├── process_logs.py       # Spark job for log analysis
 │
 │── sql/                       
-│   ├── create_tables.sql      
+│   ├── create_tables.sql     # Creates database tables
+│   ├── load_data.sql         # SQL for data loading
 │
 │── data/                     
-│   ├── raw_logs/             
-│   ├── processed_logs/       
+│   ├── raw_logs/            # NASA HTTP logs (July 1995)
+│   ├── processed_logs/       # Processed log data
 │
 │── reports/                   
-│   ├── log_analytics.pbix     
+│   ├── log_analytics.pbix    # Power BI dashboard
 │
 │── config/                    
 │   ├── airflow.cfg            
 │   ├── database.ini           
+│
+
 ```
 
 ## Prerequisites
@@ -37,15 +40,13 @@ log-analytics-pipeline/
 - PostgreSQL 13+
 - Power BI Desktop
 
-
 ## Dependencies
 
-- apache-airflow
-- pyspark
-- psycopg2-binary
-- python-dotenv
-- pandas
-- numpy
-
-
+- apache-airflow>=2.7.0
+- pyspark>=3.5.0
+- psycopg2-binary>=2.9.9
+- python-dotenv>=1.0.0
+- pandas>=2.1.0
+- numpy>=1.24.0
+- requests>=2.31.0
 
