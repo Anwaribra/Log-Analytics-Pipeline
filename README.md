@@ -40,8 +40,6 @@ log-analytics-pipeline/
 │── config/                    
 │   ├── airflow.cfg          # Airflow configuration
 │   ├── database.ini         # Database connection settings
-│
-│── download_nasa_logs.py     # Script to download NASA logs
 │── requirements.txt          # Python dependencies
 ```
 
