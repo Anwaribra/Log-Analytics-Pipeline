@@ -1,5 +1,5 @@
 from airflow import DAG
-from airflow.providers.apache.spark.operators.spark_submit import SparkSubmitOperator
+from airflow.providers.apache.spark.operators.spark import SparkSubmitOperator
 from datetime import datetime, timedelta
 
 default_args = {
@@ -15,14 +15,14 @@ default_args = {
 with DAG(
     'spark_processing',
     default_args=default_args,
-    description='DAG to process logs using Spark',
-    schedule='@daily',
+    description='Process NASA HTTP logs using Spark',
+    schedule='@once',  
     catchup=False
 ) as dag:
 
     spark_job = SparkSubmitOperator(
-        task_id='process_logs',
-        application='/opt/airflow/spark_jobs/process_logs.py',
+        task_id='process_nasa_logs',
+        application='spark_jobs/process_logs.py',
         conn_id='spark_default',
         conf={
             'spark.driver.memory': '2g',

@@ -3,8 +3,8 @@ services:
   spark-master:
     image: apache/spark
     ports:
-      - "8080:8080"  # Spark Web UI
-      - "7077:7077"  # Spark Master port
+      - "8080:8080"  
+      - "7077:7077"  
     command: >
       bash -c "
         mkdir -p /opt/spark/logs &&

@@ -51,3 +51,7 @@ logs/
 # OS specific
 .DS_Store
 Thumbs.db 
+
+# airflow.cfg
+airflow.cfg
+airflow_env/

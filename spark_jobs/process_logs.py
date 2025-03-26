@@ -2,80 +2,104 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
 from datetime import datetime
 import re
+from urllib.parse import urlparse
+import os
 
 def create_spark_session():
     return SparkSession.builder \
-        .appName("Nginx Log Processing") \
+        .appName("NASA Log Processing") \
         .config("spark.driver.memory", "2g") \
         .config("spark.executor.memory", "4g") \
         .getOrCreate()
 
-def parse_nginx_log(line):
+def parse_nasa_log(line):
     """
-    Parse Nginx log line using regex pattern
-    Nginx default log format:
-    $remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent"
+    Parse NASA HTTP log line using regex pattern
     """
-    pattern = r'(?P<ip_address>[\d.]+) - (?P<remote_user>[\w-]+) \[(?P<timestamp>[\w\s:+/]+)\] "(?P<request>.*?)" (?P<status>\d+) (?P<response_size>\d+) "(?P<referer>.*?)" "(?P<user_agent>.*?)"'
+    pattern = r'(\S+) - - \[(.*?)\] "(.*?)" (\d+) (\d+|-)'
     match = re.match(pattern, line)
     
-    if match:
-        return match.groupdict()
-    return None
+    if not match:
+        return None
+        
+    host, timestamp_str, request, status, size = match.groups()
+    
+    try:
+        
+        timestamp = datetime.strptime(timestamp_str, '%d/%b/%Y:%H:%M:%S %z')
+        
+        
+        try:
+            method, url, protocol = request.split()
+        except ValueError:
+            method, url, protocol = 'UNKNOWN', request, 'UNKNOWN'
+        
+        parsed_url = urlparse(url)
+        path = parsed_url.path
+        query = parsed_url.query
+        
+      
+        file_extension = os.path.splitext(path)[1].lower()[1:] if path else ''
+       
+        size = int(size) if size != '-' else 0
+        
+        return {
+            'timestamp': timestamp,
+            'ip_address': host,
+            'request_method': method,
+            'request_url': url,
+            'http_version': protocol,
+            'status_code': int(status),
+            'response_size': size,
+            'path': path,
+            'query_params': query,
+            'file_extension': file_extension,
+            'is_robot': bool(re.search(r'bot|crawler|spider', request.lower())),
+            'is_error': int(status) >= 400
+        }
+    except Exception:
+        return None
 
 def process_logs():
     spark = create_spark_session()
     
-    # Read raw logs from the mounted volume
-    raw_logs = spark.read.text("/opt/spark/data/raw_logs/*")
+    # Read raw logs
+    raw_logs = spark.read.text("data/raw_logs/*.log")
     
-    # Convert to DataFrame with parsed fields
-    parsed_logs = raw_logs.rdd.map(lambda x: parse_nginx_log(x[0])) \
+   
+    parsed_logs = raw_logs.rdd.map(lambda x: parse_nasa_log(x[0])) \
         .filter(lambda x: x is not None) \
-        .map(lambda x: (
-            datetime.strptime(x['timestamp'], '%d/%b/%Y:%H:%M:%S %z'),
-            x['ip_address'],
-            x['request'].split()[0] if len(x['request'].split()) > 0 else '',  # HTTP method
-            x['request'].split()[1] if len(x['request'].split()) > 1 else '',  # URL
-            int(x['status']),
-            int(x['response_size']),
-            x['user_agent'],
-            x['referer']
-        ))
+        .toDF()
     
-    # Create DataFrame with schema
-    processed_logs = parsed_logs.toDF([
-        'timestamp',
-        'ip_address',
-        'request_method',
-        'request_url',
-        'status_code',
-        'response_size',
-        'user_agent',
-        'referer'
-    ])
     
-    # Add some basic analytics
-    processed_logs = processed_logs.withColumn('hour', hour('timestamp')) \
-        .withColumn('day_of_week', dayofweek('timestamp')) \
-        .withColumn('is_error', when(col('status_code') >= 400, True).otherwise(False))
-    
-    # Write processed logs to the mounted volume
-    processed_logs.write \
+    parsed_logs.write \
         .mode("overwrite") \
-        .parquet("/opt/spark/data/processed_logs/")
+        .parquet("data/processed_logs/nasa_logs.parquet")
     
-    # Print some basic statistics
-    print("\nLog Processing Statistics:")
-    print("-" * 50)
-    print(f"Total number of log entries: {processed_logs.count()}")
-    print(f"Number of errors: {processed_logs.filter(col('is_error')).count()}")
-    print(f"Average response size: {processed_logs.agg(avg('response_size')).collect()[0][0]:.2f} bytes")
     
-    # Show sample of processed logs
-    print("\nSample of processed logs:")
+    print("\nNASA Log Processing Statistics:")
     print("-" * 50)
-    processed_logs.show(5, truncate=False)
+    print(f"Total log entries: {parsed_logs.count()}")
+    print(f"Error requests (4xx/5xx): {parsed_logs.filter(col('is_error')).count()}")
+    print(f"Bot/Crawler requests: {parsed_logs.filter(col('is_robot')).count()}")
+    print(f"Average response size: {parsed_logs.agg(avg('response_size')).collect()[0][0]:.2f} bytes")
+    
+   
+    print("\nTop 5 Requested Paths:")
+    print("-" * 50)
+    parsed_logs.groupBy('path') \
+        .agg(count('*').alias('hits')) \
+        .orderBy(desc('hits')) \
+        .show(5, truncate=False)
+    
+    # Show error distribution
+    print("\nError Status Code Distribution:")
+    print("-" * 50)
+    parsed_logs.filter(col('is_error')) \
+        .groupBy('status_code') \
+        .agg(count('*').alias('count')) \
+        .orderBy(desc('count')) \
+        .show()
 
 if __name__ == "__main__":
     process_logs() 
