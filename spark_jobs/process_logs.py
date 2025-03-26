@@ -13,9 +13,7 @@ def create_spark_session():
         .getOrCreate()
 
 def parse_nasa_log(line):
-    """
-    Parse NASA HTTP log line using regex pattern
-    """
+
     pattern = r'(\S+) - - \[(.*?)\] "(.*?)" (\d+) (\d+|-)'
     match = re.match(pattern, line)
     
