@@ -31,7 +31,7 @@ log-analytics-pipeline/
 │
 │── reports/                   
 │   ├── log_analytics.pbix    
-
+│ 
 │── requirements.txt         
 ```
 

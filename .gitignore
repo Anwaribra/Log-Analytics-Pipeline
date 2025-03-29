@@ -67,10 +67,6 @@ config/
 
 
 
-#scripts
-scripts/
-
-
 #data
 data/
 
