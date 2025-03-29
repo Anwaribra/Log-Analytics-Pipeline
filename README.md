@@ -27,20 +27,12 @@ log-analytics-pipeline/
 │   ├── process_logs.py       # Spark job for log analysis
 │
 │── sql/                       
-│   ├── create_tables.sql     # Creates database tables
-│   ├── load_data.sql         # SQL for data loading
-│
-│── data/                     
-│   ├── raw_logs/            # NASA HTTP logs (July 1995)
-│   ├── processed_logs/       # Processed log data
+│   ├── create_tables.sql     
 │
 │── reports/                   
-│   ├── log_analytics.pbix    # Power BI dashboard
-│
-│── config/                    
-│   ├── airflow.cfg          # Airflow configuration
-│   ├── database.ini         # Database connection settings
-│── requirements.txt          # Python dependencies
+│   ├── log_analytics.pbix    
+
+│── requirements.txt         
 ```
 
 ## Prerequisites
