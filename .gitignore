@@ -55,3 +55,24 @@ Thumbs.db
 # airflow.cfg
 airflow.cfg
 airflow_env/
+
+#database.ini
+database.ini
+
+#config
+config/ 
+
+
+
+
+
+
+#scripts
+scripts/
+
+
+#data
+data/
+
+#sql
+sql/
