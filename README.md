@@ -22,12 +22,12 @@ This pipeline analyzes NASA's web server logs from July to September 1995, conta
 ```
 log-analytics-pipeline/
 │── dags/                   
-│   ├── log_ingestion.py      # Downloads NASA HTTP logs
-│   ├── spark_processing.py   # Processes logs using Spark
-│   ├── data_load.py         # Loads processed data into PostgreSQL
+│   ├── log_ingestion.py    
+│   ├── spark_processing.py   
+│   ├── data_load.py         
 │
 │── spark_jobs/               
-│   ├── process_logs.py       # Spark job for log analysis
+│   ├── process_logs.py       
 │
 │── sql/                       
 │   ├── create_tables.sql     
