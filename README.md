@@ -38,16 +38,19 @@ log-analytics-pipeline/
 │── requirements.txt         
 ``` 
 
-
-
-
 ## Spark Analysis Summary
 
-![Log Analysis Summary](docs/images/summary.png)
+-Log Analysis Summary
+===============================================
+Total Requests: 3,461,612
+Unique Hosts: 137,978
+Total Data Transferred: 61.02 GB
+Average Response Size: 18928.84 bytes
 
 
-![Processing Statistics]
-```
+
+-Processing Statistics
+
 Processed NASA_access_log_Aug95.log
 Found 1,569,898 valid log entries
 
@@ -56,7 +59,7 @@ Processed NASA_access_log_Jul95.log
 Found 1,891,714 valid log entries
 
 Total log entries: 3,461,612
-```
+
 
 
 
