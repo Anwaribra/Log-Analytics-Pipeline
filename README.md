@@ -40,43 +40,22 @@ log-analytics-pipeline/
 
 ## Spark Analysis Summary
 
-<div align="center">
+### Log Analysis Summary
 
-###  Log Analysis Summary 
+| Metric | Value |
+|--------|-------|
+| Total Requests | 3,461,612 |
+| Unique Hosts | 137,978 |
+| Total Data Transferred | 61.02 GB |
+| Average Response Size | 18,928.84 bytes |
 
-|                   Metric                   |          Value          |
-|-------------------------------------------|-------------------------|
-| **Total Requests**                      | 3,461,612               |
-| **Unique Hosts**                        | 137,978                 |
-| **Total Data Transferred**              | 61.02 GB                |
-| **Average Response Size**               | 18,928.84 bytes         |
+### Processing Statistics
 
-</div>
-
-### Processing Statistics 
-
-<table>
-<tr>
-  <th>Log File</th>
-  <th>Valid Entries</th>
-  <th>Status</th>
-</tr>
-<tr>
-  <td>NASA_access_log_Aug95.log</td>
-  <td>1,569,898</td>
-  <td>Processed</td>
-</tr>
-<tr>
-  <td>NASA_access_log_Jul95.log</td>
-  <td>1,891,714</td>
-  <td> Processed</td>
-</tr>
-<tr>
-  <td><strong>Total</strong></td>
-  <td><strong>3,461,612</strong></td>
-  <td> Complete</td>
-</tr>
-</table>
+| Log File | Valid Entries 
+|----------|---------------|
+| NASA_access_log_Aug95.log | 1,569,898 |
+| NASA_access_log_Jul95.log | 1,891,714 |
+| Total | 3,461,612 | 
 
 ## Prerequisites
 
