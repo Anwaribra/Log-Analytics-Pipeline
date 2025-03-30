@@ -40,28 +40,43 @@ log-analytics-pipeline/
 
 ## Spark Analysis Summary
 
--Log Analysis Summary
-===============================================
-Total Requests: 3,461,612
-Unique Hosts: 137,978
-Total Data Transferred: 61.02 GB
-Average Response Size: 18928.84 bytes
+<div align="center">
 
+###  Log Analysis Summary 
 
+|                   Metric                   |          Value          |
+|-------------------------------------------|-------------------------|
+| ** Total Requests**                      | 3,461,612               |
+| ** Unique Hosts**                        | 137,978                 |
+| ** Total Data Transferred**              | 61.02 GB                |
+| ** Average Response Size**               | 18,928.84 bytes         |
 
--Processing Statistics
+</div>
 
-Processed NASA_access_log_Aug95.log
-Found 1,569,898 valid log entries
+###  Processing Statistics 
 
-
-Processed NASA_access_log_Jul95.log
-Found 1,891,714 valid log entries
-
-Total log entries: 3,461,612
-
-
-
+<table>
+<tr>
+  <th>Log File</th>
+  <th>Valid Entries</th>
+  <th>Status</th>
+</tr>
+<tr>
+  <td>NASA_access_log_Aug95.log</td>
+  <td>1,569,898</td>
+  <td>Processed</td>
+</tr>
+<tr>
+  <td>NASA_access_log_Jul95.log</td>
+  <td>1,891,714</td>
+  <td> Processed</td>
+</tr>
+<tr>
+  <td><strong>Total</strong></td>
+  <td><strong>3,461,612</strong></td>
+  <td>🏁 Complete</td>
+</tr>
+</table>
 
 ## Prerequisites
 
@@ -70,23 +85,6 @@ Total log entries: 3,461,612
 - Apache Spark 3.x
 - PostgreSQL 13+
 - Power BI
-
-
-
-## Dependencies
-
-```bash
-# Core dependencies
-apache-airflow>=2.7.0
-pyspark>=3.5.0
-pandas>=2.1.0
-psycopg2-binary>=2.9.9
-python-dotenv>=1.0.0
-tqdm>=4.66.0
-
-```
-
-
 
 <!-- ## Performance Metrics
 
