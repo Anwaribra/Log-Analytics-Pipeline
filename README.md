@@ -46,10 +46,10 @@ log-analytics-pipeline/
 
 |                   Metric                   |          Value          |
 |-------------------------------------------|-------------------------|
-| ** Total Requests**                      | 3,461,612               |
-| ** Unique Hosts**                        | 137,978                 |
-| ** Total Data Transferred**              | 61.02 GB                |
-| ** Average Response Size**               | 18,928.84 bytes         |
+| **Total Requests**                      | 3,461,612               |
+| **Unique Hosts**                        | 137,978                 |
+| **Total Data Transferred**              | 61.02 GB                |
+| **Average Response Size**               | 18,928.84 bytes         |
 
 </div>
 
