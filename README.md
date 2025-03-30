@@ -53,7 +53,7 @@ log-analytics-pipeline/
 
 </div>
 
-###  Processing Statistics 
+### Processing Statistics 
 
 <table>
 <tr>
@@ -74,7 +74,7 @@ log-analytics-pipeline/
 <tr>
   <td><strong>Total</strong></td>
   <td><strong>3,461,612</strong></td>
-  <td>🏁 Complete</td>
+  <td> Complete</td>
 </tr>
 </table>
 
