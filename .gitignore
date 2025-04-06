@@ -70,5 +70,3 @@ config/
 #data
 data/
 
-#sql
-sql/
