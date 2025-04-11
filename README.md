@@ -5,6 +5,7 @@ This project implements an end-to-end log analytics pipeline that processes NASA
 ## Project Ovrview
 
 This pipeline analyzes NASA's web server logs from July to September 1995, containing:
+
 - HTTP request timestamps
 - Client host information
 - Request methods and paths
@@ -17,43 +18,8 @@ This pipeline analyzes NASA's web server logs from July to September 1995, conta
 
 ![Pipeline Architecture](docs/images/Pipelinearchitecture.png)
 
-## Grafana Dashboards
 
-Our real-time monitoring system uses Grafana to visualize key metrics and insights:
-
-![Grafana Dashboard](docs/images/grafana_dashboard.png)
-
-Key visualizations include:
-- Global NASA Website Traffic Distribution Map
-- Most Requested Resources Analysis
-- Request Trends Over Time
-- Daily Traffic Patterns
-- Response Size Distribution
-- Hourly Traffic Patterns
-- Top Countries by Traffic Volume
-
-## Project Structure
-
-```
-log-analytics-pipeline/
-│── dags/                   
-│   ├── log_ingestion.py    
-│   ├── spark_processing.py   
-│   ├── data_load.py         
-│
-│── spark_jobs/               
-│   ├── process_logs.py       
-│
-│── sql/                       
-│   ├── create_tables.sql     
-│
-│── reports/                   
-│   ├── log_analytics.pbix    
-│ 
-│── requirements.txt         
-``` 
-
-## Spark Analysis Summary
+## Analysis Summary
 
 ### Log Analysis Summary
 
@@ -72,58 +38,35 @@ log-analytics-pipeline/
 | NASA_access_log_Jul95.log | 1,891,714 |
 | Total | 3,461,612 | 
 
-## Prerequisites
-
-- Python 3.8+
-- Apache Airflow 2.x
-- Apache Spark 3.x
-- PostgreSQL 13+
-- Power BI
-
-<!-- ## Performance Metrics
+## Performance Metrics
 
 ![Performance Dashboard](docs/images/performance.png)
 
-## Error Analysis
+## Global Traffic Distribution Map
 
-![Error Patterns](docs/images/error_analysis.png) -->
+![Distribution Map](docs/images/DistributionMap.png) 
 
 ## Analysis Features
 
 1. Basic Statistics:
+
 - Total requests per month
 - Unique visitors
 - Data transfer volumes
 - Average response sizes
 
 2. Traffic Analysis:
+
 - Hourly request patterns
 - Most requested paths
 - Error rate analysis
 - Status code distribution
 
 3. Monthly Comparisons:
+
 - Traffic patterns across months
 - Error rates comparison
 - Resource usage trends
-
-
-## Airflow DAGs
-
-1. `data_load.py`:
-- Loads raw logs into PostgreSQL
-- Creates necessary tables and indexes
-- Handles data validation
-
-2. `log_ingestion.py`:
-- Manages the complete log processing workflow
-- Schedules regular data updates
-- Monitors processing status
-
-3. `spark_processing.py`:
-- Handles Spark processing for large datasets
-- Schedules regular processing
-- Monitors processing status
 
 ## Future Improvements
 
@@ -131,10 +74,10 @@ log-analytics-pipeline/
 2. Implement automated testing
 3. Add visualization dashboard
 4. Include more advanced analytics:
+
    - User behavior analysis
    - Geographic distribution
    - Performance metrics
    - Anomaly detection
 5. Add Airflow sensors for file monitoring
 6. Implement parallel processing for large log files
-
