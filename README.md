@@ -17,6 +17,21 @@ This pipeline analyzes NASA's web server logs from July to September 1995, conta
 
 ![Pipeline Architecture](docs/images/Pipelinearchitecture.png)
 
+## Grafana Dashboards
+
+Our real-time monitoring system uses Grafana to visualize key metrics and insights:
+
+![Grafana Dashboard](docs/images/grafana_dashboard.png)
+
+Key visualizations include:
+- Global NASA Website Traffic Distribution Map
+- Most Requested Resources Analysis
+- Request Trends Over Time
+- Daily Traffic Patterns
+- Response Size Distribution
+- Hourly Traffic Patterns
+- Top Countries by Traffic Volume
+
 ## Project Structure
 
 ```
