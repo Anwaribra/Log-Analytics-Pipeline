@@ -42,6 +42,10 @@ This pipeline analyzes NASA's web server logs from July to September 1995, conta
 
 ![Performance Dashboard](docs/images/performance.png)
 
+## Request Trends 
+
+![Request Trends](docs/images/RequestTrends.png)
+
 ## Global Traffic Distribution Map
 
 ![Distribution Map](docs/images/DistributionMap.png) 
